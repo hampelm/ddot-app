@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name = "format-detection" content = "telephone=no"/>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width;" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="js/lib/leaflet/leaflet.css" />
+
+    <title>DetroitWiki</title>
+</head>
+<body>
+    <div class="app">
+      <header>
+        <h1><a href="index.html" class="site-title">DetroitWiki</a></h1>
+      </header>
+
+      <div id="container"></div>
+    </div>
+
+    <!-- Core scripts  ================================================-->
+    <script type="text/javascript" src="js/lib/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="js/lib/underscore.js"></script>
+    <script type="text/javascript" src="js/lib/backbone.js"></script>
+    <script type="text/javascript" src="js/lib/leaflet/leaflet.js"></script>
+
+    <script type="text/javascript" src="js/index.js"></script>
+
+    <!-- Templates ========================================================-->
+    <!-- Home .............................................................-->
+    <script type="text/template" id="home">
+      <div id="search"></div>
+
+      <div class="near-me">
+        <h2>Things near me</h2>
+        <div id="near-me-map"></div>
+        <p>This will be a map &amp; list of things near you if you have
+        geolocation turned on.</p>
+      </div>
+
+      <div id="home-page-list"></div>
+    </script>
+
+    <!-- Page .............................................................-->
+    <script type="text/template" id="page-view">
+      <div class="page">
+        <h2 class="page-header"><%= page.name %></h2>
+
+        <div id="map-container"></div>
+
+        <div id="page-content">
+          <%= page.content %>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/template" id="page-list-view">
+      <div class="page-list">
+        <% _.each(pages, function(page) { %>
+          <div class="page list-elt">
+            <h2><a href="#page/<%= page.name %>"><%= page.name %></a></h2>
+          </div>
+        <% }); %>
+      </div>
+    </script>
+
+
+    <!-- Search & Map .....................................................-->
+    <script type="text/template" id="search-view">
+      <input type="text" placeholder="Search" class="search" id="search-input">
+
+      <div id="search-results"></div>
+    </script>
+
+    <script type="text/template" id="map-view">
+      <div id="<%= id %>" class="map"></div>
+      <div id="map-list"></div>
+    </script>
+
+
+    <!-- App ============================================================-->
+    <!-- Models & router -->
+    <script type="text/javascript" src="js/models/site.js"></script>
+    <script type="text/javascript" src="js/models/pages.js"></script>
+    <script type="text/javascript" src="js/models/maps.js"></script>
+    <script type="text/javascript" src="js/models/users.js"></script>
+    <script type="text/javascript" src="js/models/versions.js"></script>
+    <script type="text/javascript" src="js/routers/index.js"></script>
+
+    <!-- Views -->
+    <script type="text/javascript" src="js/views/home.js"></script>
+    <script type="text/javascript" src="js/views/page.js"></script>
+    <script type="text/javascript" src="js/views/map.js"></script>
+    <script type="text/javascript" src="js/views/search.js"></script>
+
+    <script type="text/javascript" src="js/views/root.js"></script>
+
+    <!-- Start the app -->
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+
+
+</body>
+</html>
