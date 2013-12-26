@@ -7,15 +7,10 @@ define([
   'lib/underscore',
   'backbone',
 
-  'routers/router',
-
-  'collections/stops',
-  'views/stops',
-
-  'text!templates/index.html'
+  'text!templates/stop.html'
 ],
 
-function($, _, Backbone, Router, StopCollection, StopsView, Template) {
+function($, _, Backbone, Router, StopsView, Template) {
   'use strict';
 
   return Backbone.View.extend({
@@ -26,10 +21,6 @@ function($, _, Backbone, Router, StopCollection, StopsView, Template) {
     initialize: function(options) {
       // _.bindAll(this, 'render');
       this.render();
-
-      this.stops = new StopCollection({
-        filter: 'nearby'
-      });
     },
 
     render: function(e) {
@@ -37,6 +28,11 @@ function($, _, Backbone, Router, StopCollection, StopsView, Template) {
 
       var context = {};
       this.$el.html(this.template(context));
+
+      var nearbyStops = new StopsView({
+        filter: 'nearby'
+      });
+
     }
   });
 });
