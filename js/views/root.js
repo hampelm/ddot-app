@@ -1,68 +1,59 @@
-LW.views.Root = Backbone.View.extend({
-  /*
-   * The singleton view which manages all others. Essentially, a "controller".
-   *
-   * A single instance of this object exists in the global namespace as 
-   * "Everything".
-   */
-  
-  el: $("#app"),
-  views: {},
-  _router: null,
-  survey: null,
-  
-  initialize: function() {
-    // Bind local methods
-    _.bindAll(this);
-    
-    // Set up global router
-    this._router = new LW.routers.Index({ controller: this });
-    
-    return this;
-  },
-  
-  startRouting: function() {
+/*jslint nomen: true */
+/*globals define: true */
+
+define([
+  'jquery',
+  'lib/underscore',
+  'backbone',
+
+  'routers/router',
+
+  'views/index'
+],
+
+function($, _, Backbone, Router, IndexView) {
+  'use strict';
+
+  return Backbone.View.extend({
     /*
-     * Start Backbone routing. Separated from initialize() so that the
-     * global controller is available for any preset routes (direct links).
+     * The singleton view which manages all others. Essentially, a "controller".
+     *
+     * A single instance of this object exists in the global namespace as
+     * "Everything".
      */
-    Backbone.history.start();
-  },
-    
-  getOrCreateView: function(name, options) {
-    // Register each view as it is created and never create more than one.
-    if (name in this.views) {
-      console.log("Going to " + name);
-      return this.views[name];
+
+    el: $("#app"),
+    views: {},
+    _router: null,
+    survey: null,
+
+    initialize: function() {
+      // Bind local methods
+      _.bindAll(this);
+
+      // Set up global router
+      this._router = new Router({ controller: this });
+
+      return this;
+    },
+
+    startRouting: function() {
+      /*
+       * Start Backbone routing. Separated from initialize() so that the
+       * global controller is available for any preset routes (direct links).
+       */
+      Backbone.history.start();
+    },
+
+    goto_home: function() {
+      this.currentContentView = new IndexView();
+      this._router.navigate("");
     }
 
-    console.log("Creating " + name);
-    this.views[name] = new LW.views[name](options);
+    //goto_stop: function(id) {
+    //  this.currentContentView = new StopView({id: id});
+    //}
 
-    return this.views[name];
-  },
-  
-  switchPage: function(page) {
-    /*
-     * Show the given page; hide the others
-     */
-    $('.page').hide();
-    if (page.show !== undefined) {
-      page.show();
-    } else {
-      page.$el.show();
-    }
-  },
-  
-  goto_home: function() {
-    this.currentContentView = this.getOrCreateView("Home");
-    this._router.navigate("");
-  },
-  
-  goto_page: function(slug) {
-    this.currentContentView = new LW.views.PageView({slug: slug});
-    this._router.navigate("page/" + slug);
-  }
-  
-  
+
+  });
 });
