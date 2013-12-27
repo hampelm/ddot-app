@@ -15,8 +15,6 @@ function($, _, Backbone, RootView) {
 
   var app = {};
 
-  app.API = 'http://detroitwiki.org';
-
   app.initialize = function() {
       // Init the backbone app. Later, this should go under deviceready.
 

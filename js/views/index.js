@@ -18,26 +18,32 @@ define([
 function($, _, Backbone, Router, StopCollection, StopsView, Template) {
   'use strict';
 
-  return Backbone.View.extend({
+  var IndexView = Backbone.View.extend({
     template: _.template(Template),
 
     el: $("#container"),
 
     initialize: function(options) {
-      // _.bindAll(this, 'render');
-      this.render();
+      _.bindAll(this, 'render');
+      // this.render();
 
       this.stops = new StopCollection({
         filter: 'nearby'
       });
+
+      this.stops.on('reset', this.render);
     },
 
     render: function(e) {
       console.log("Rendering home");
 
-      var context = {};
+      var context = {
+        stops: this.stops.toJSON()
+      };
       this.$el.html(this.template(context));
     }
   });
+
+  return IndexView;
 });
 

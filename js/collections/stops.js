@@ -15,28 +15,24 @@ define([
 function($, _, Backbone, settings, StopModel) {
   'use strict';
 
-  return Backbone.Collection.extend({
+  var StopCollection = Backbone.Collection.extend({
     model: StopModel,
 
-    url: settings.base + "/api/page/?format=json",
+    url: "http://ddot-beta.herokuapp.com/api/api/where/stops-for-route/DDOT_5435.json?key=BETA",
 
     initialize: function(options) {
-      _.bindAll(this, 'parse', 'query');
-    },
-
-    search_url: function(term) {
-    },
-
-    query: function(query) {
-    },
-
-    query_near: function(location) {
+      console.log(options);
+      // _.bindAll(this, 'parse', 'query');
+      this.fetch();
     },
 
     parse: function(response) {
       console.log(response);
+      return response.data.references.stops;
     }
 
   });
+
+  return StopCollection;
 
 });

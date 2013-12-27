@@ -19,58 +19,5 @@
 
       <div id="container"></div>
     </div>
-
-    <!-- Templates ========================================================-->
-    <!-- Home .............................................................-->
-    <script type="text/template" id="home">
-      <div id="search"></div>
-
-      <div class="near-me">
-        <h2>Things near me</h2>
-        <div id="near-me-map"></div>
-        <p>This will be a map &amp; list of things near you if you have
-        geolocation turned on.</p>
-      </div>
-
-      <div id="home-page-list"></div>
-    </script>
-
-    <!-- Page .............................................................-->
-    <script type="text/template" id="page-view">
-      <div class="page">
-        <h2 class="page-header"><%= page.name %></h2>
-
-        <div id="map-container"></div>
-
-        <div id="page-content">
-          <%= page.content %>
-        </div>
-      </div>
-    </script>
-
-    <script type="text/template" id="page-list-view">
-      <div class="page-list">
-        <% _.each(pages, function(page) { %>
-          <div class="page list-elt">
-            <h2><a href="#page/<%= page.name %>"><%= page.name %></a></h2>
-          </div>
-        <% }); %>
-      </div>
-    </script>
-
-
-    <!-- Search & Map .....................................................-->
-    <script type="text/template" id="search-view">
-      <input type="text" placeholder="Search" class="search" id="search-input">
-
-      <div id="search-results"></div>
-    </script>
-
-    <script type="text/template" id="map-view">
-      <div id="<%= id %>" class="map"></div>
-      <div id="map-list"></div>
-    </script>
-
-
 </body>
 </html>

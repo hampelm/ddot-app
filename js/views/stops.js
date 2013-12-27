@@ -7,11 +7,14 @@ define([
   'lib/underscore',
   'backbone',
 
+  'views/stops',
+
   'text!templates/stop.html'
 ],
 
-function($, _, Backbone, Router, StopsView, Template) {
+function($, _, Backbone, StopsView, Template) {
   'use strict';
+  console.log(Template);
 
   return Backbone.View.extend({
     template: _.template(Template),
